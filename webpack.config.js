@@ -57,6 +57,10 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loader: 'url?limit=10000&name=[path][name][hash:6].[ext]&context=src/assets'
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
             }
         ]
     },
