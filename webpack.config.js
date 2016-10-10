@@ -30,7 +30,8 @@ module.exports = {
     },
 
     output: {
-        path: './dist/js',
+        path: './dist/assets',
+        publicPath: 'assets/',
         filename: 'app.bundle.js'
     },
 
@@ -52,6 +53,10 @@ module.exports = {
                 query: {
                     presets: getBabelPresets(['es2015', 'react'])
                 }
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: 'url?limit=10000&name=[path][name][hash:6].[ext]&context=src/assets'
             }
         ]
     },
