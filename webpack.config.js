@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 function getBabelPresets(defaultPresets) {
     var presets = defaultPresets;
@@ -61,9 +62,13 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: process.env.NODE_ENV === 'production' ? ExtractTextPlugin.extract('style', 'css?modules=true&localIdentName=[local]---[hash:6]!sass') : 'style!css?modules=true&localIdentName=[local]---[hash:6]!sass'
+                loader: process.env.NODE_ENV === 'production' ? ExtractTextPlugin.extract('style', 'css?modules=true&localIdentName=[local]---[hash:6]!postcss!sass') : 'style!css?modules=true&localIdentName=[local]---[hash:6]!postcss!sass'
             }
         ]
+    },
+
+    postcss: function() {
+        return [autoprefixer]
     },
 
     plugins: [
