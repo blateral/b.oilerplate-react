@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 function getBabelPresets(defaultPresets) {
     var presets = defaultPresets;
@@ -60,7 +61,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'sass']
+                loader: process.env.NODE_ENV === 'production' ? ExtractTextPlugin.extract('style', 'css!sass') : 'style!css!sass'
             }
         ]
     },
@@ -75,6 +76,7 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
-        })
+        }),
+        new ExtractTextPlugin('main.css')
     ]
 }
