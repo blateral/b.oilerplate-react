@@ -6,10 +6,10 @@ A simple boilerplate for single page React apps.
 * Webpack
 * Hot Module Reloading
 * ESLint
+* Sass
+* CSS-Modules
+* Autoprefixer
 * Production builds
-
-### Coming soon
-[] Mocha tests
 
 ## Setup
 `npm install`
