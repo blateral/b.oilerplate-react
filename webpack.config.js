@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 function getBabelPresets(defaultPresets) {
     var presets = defaultPresets;
@@ -30,7 +32,8 @@ module.exports = {
     },
 
     output: {
-        path: './dist/js',
+        path: './dist/assets',
+        publicPath: 'assets/',
         filename: 'app.bundle.js'
     },
 
@@ -52,8 +55,20 @@ module.exports = {
                 query: {
                     presets: getBabelPresets(['es2015', 'react'])
                 }
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: 'url?limit=10000&name=[path][name][hash:6].[ext]&context=src/assets'
+            },
+            {
+                test: /\.scss$/,
+                loader: process.env.NODE_ENV === 'production' ? ExtractTextPlugin.extract('style', 'css?modules=true&localIdentName=[local]---[hash:6]!postcss!sass') : 'style!css?modules=true&localIdentName=[local]---[hash:6]!postcss!sass'
             }
         ]
+    },
+
+    postcss: function() {
+        return [autoprefixer]
     },
 
     plugins: [
@@ -66,6 +81,7 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
-        })
+        }),
+        new ExtractTextPlugin('main.css')
     ]
 }
