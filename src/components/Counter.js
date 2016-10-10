@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import styles from './Counter.scss';
 
 class Counter extends Component {
 
@@ -20,7 +21,7 @@ class Counter extends Component {
 
     render() {
         return (
-            <h1>{this.state.counter}</h1>
+            <h1 className={styles.foo}>{this.state.counter}</h1>
         )
     }
 

@@ -61,7 +61,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: process.env.NODE_ENV === 'production' ? ExtractTextPlugin.extract('style', 'css!sass') : 'style!css!sass'
+                loader: process.env.NODE_ENV === 'production' ? ExtractTextPlugin.extract('style', 'css?modules=true&localIdentName=[local]---[hash:6]!sass') : 'style!css?modules=true&localIdentName=[local]---[hash:6]!sass'
             }
         ]
     },
