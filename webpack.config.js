@@ -32,9 +32,8 @@ module.exports = {
     },
 
     output: {
-        path: './dist/assets',
-        publicPath: 'assets/',
-        filename: 'app.bundle.js'
+        path: './dist',
+        filename: 'js/app.bundle.js'
     },
 
     module: {
@@ -58,7 +57,7 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                loader: 'url?limit=10000&name=[path][name][hash:6].[ext]&context=src/assets'
+                loader: 'url?limit=10000&name=assets/[path][name][hash:6].[ext]&context=src/assets'
             },
             {
                 test: /\.scss$/,
@@ -73,16 +72,16 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            filename: '../index.html',
+            filename: 'index.html',
             template: './src/index.html'
         }),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
         }),
-        new ExtractTextPlugin('main.css'),
+        new ExtractTextPlugin('css/main.css'),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
