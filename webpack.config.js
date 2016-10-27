@@ -82,6 +82,11 @@ module.exports = {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
         }),
-        new ExtractTextPlugin('main.css')
+        new ExtractTextPlugin('main.css'),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
     ]
 }
